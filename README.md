@@ -11,6 +11,10 @@ A customizable mobile-friendly picker component for React applications, built wi
 - TypeScript support
 - Compatible with Material-UI v5 and v6
 
+## Example
+
+![Mobile Picker Example](./assets/images/picker-example.png)
+
 ## Installation
 
 ```bash
@@ -144,6 +148,8 @@ const timePickerData = [
   initialValues={{ Hour: 12, Minute: 30 }}
 />;
 ```
+
+![Time Picker Example](./assets/images/time-picker-example.png)
 
 ### Custom Styling
 
