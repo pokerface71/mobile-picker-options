@@ -1,4 +1,4 @@
-# React Mobile Picker options
+# React Mobile Picker options V [1.0.1]
 
 A customizable mobile-friendly picker component for React applications, built with Material-UI.
 
