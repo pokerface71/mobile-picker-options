@@ -1,4 +1,4 @@
-# React Custom Mobile Picker
+# React Mobile Picker options
 
 A customizable mobile-friendly picker component for React applications, built with Material-UI.
 
@@ -14,9 +14,9 @@ A customizable mobile-friendly picker component for React applications, built wi
 ## Installation
 
 ```bash
-npm install react-custom-mobile-picker
+npm install mobile-picker-options
 # or
-yarn add react-custom-mobile-picker
+yarn add mobile-picker-options
 ```
 
 ## Prerequisites

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CustomMobilePicker } from "../index";
+import { MobilePickerOptions } from "../index";
 import { Box, Typography, Container } from "@mui/material";
 
 interface DateValues {
@@ -57,7 +57,7 @@ const DatePickerExample: React.FC = () => {
           Date Picker Example
         </Typography>
 
-        <CustomMobilePicker
+        <MobilePickerOptions
           data={pickerData}
           onChange={handleChange}
           initialValues={values}

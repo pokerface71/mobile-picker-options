@@ -1,2 +1,2 @@
-export { default as CustomMobilePicker } from "./CustomMobilePicker";
-export type { PickerOption, PickerColumnData } from "./CustomMobilePicker";
+export { default as MobilePickerOptions } from "./MobilePickerOptions";
+export type { PickerOption, PickerColumnData } from "./MobilePickerOptions";

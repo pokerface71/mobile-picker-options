@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { CustomMobilePicker } from "../index";
+import { MobilePickerOptions } from "../index";
+import React from "react";
 
 // Mock data for testing
 const mockData = [
@@ -21,25 +22,25 @@ const mockData = [
   },
 ];
 
-describe("CustomMobilePicker", () => {
+describe("MobilePickerOptions", () => {
   it("renders without crashing", () => {
-    render(<CustomMobilePicker data={mockData} />);
+    render(<MobilePickerOptions data={mockData} />);
   });
 
   it("displays column labels", () => {
-    render(<CustomMobilePicker data={mockData} showLabels={true} />);
+    render(<MobilePickerOptions data={mockData} showLabels={true} />);
     expect(screen.getByText("Year")).toBeInTheDocument();
     expect(screen.getByText("Month")).toBeInTheDocument();
   });
 
   it("does not display column labels when showLabels is false", () => {
-    render(<CustomMobilePicker data={mockData} showLabels={false} />);
+    render(<MobilePickerOptions data={mockData} showLabels={false} />);
     expect(screen.queryByText("Year")).not.toBeInTheDocument();
     expect(screen.queryByText("Month")).not.toBeInTheDocument();
   });
 
   it("displays option values", () => {
-    render(<CustomMobilePicker data={mockData} />);
+    render(<MobilePickerOptions data={mockData} />);
     expect(screen.getByText("2020")).toBeInTheDocument();
     expect(screen.getByText("2021")).toBeInTheDocument();
     expect(screen.getByText("2022")).toBeInTheDocument();
@@ -50,7 +51,7 @@ describe("CustomMobilePicker", () => {
 
   it("applies custom height and itemHeight", () => {
     const { container } = render(
-      <CustomMobilePicker data={mockData} height={300} itemHeight={50} />
+      <MobilePickerOptions data={mockData} height={300} itemHeight={50} />
     );
 
     // Check if the height is applied correctly

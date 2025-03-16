@@ -1,5 +1,5 @@
 {
-  "name": "react-custom-mobile-picker",
+  "name": "mobile-picker-options",
   "version": "1.0.0",
   "description": "A customizable mobile-friendly picker component for React applications",
   "main": "dist/index.js",
@@ -63,10 +63,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/react-custom-mobile-picker.git"
+    "url": "https://github.com/pokerface71/mobile-picker-options"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/react-custom-mobile-picker/issues"
+    "url": "https://github.com/pokerface71/mobile-picker-options/issues"
   },
-  "homepage": "https://github.com/yourusername/react-custom-mobile-picker#readme"
+  "homepage": "https://github.com/pokerface71/mobile-picker-options/blob/main/README.md"
 }

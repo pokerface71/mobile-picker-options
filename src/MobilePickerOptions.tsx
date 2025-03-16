@@ -19,7 +19,7 @@ export interface PickerColumnData {
   options: PickerOption[];
 }
 
-interface CustomMobilePickerProps {
+interface MobilePickerOptionsProps {
   data: PickerColumnData[];
   onChange?: (values: Record<string, any>) => void;
   initialValues?: Record<string, any>;
@@ -112,7 +112,7 @@ const PickerHighlight = styled(Box)<{ itemHeight: number; top: number }>(
   })
 );
 
-const CustomMobilePicker: React.FC<CustomMobilePickerProps> = ({
+const MobilePickerOptions: React.FC<MobilePickerOptionsProps> = ({
   data,
   onChange,
   initialValues,
@@ -351,4 +351,4 @@ const CustomMobilePicker: React.FC<CustomMobilePickerProps> = ({
   );
 };
 
-export default CustomMobilePicker;
+export default MobilePickerOptions;
