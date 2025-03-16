@@ -35,7 +35,7 @@ react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
 ```jsx
 import React, { useState } from "react";
-import { CustomMobilePicker } from "react-custom-mobile-picker";
+import { MobilePickerOptions } from "mobile-picker-options";
 
 const App = () => {
   const [values, setValues] = useState({
@@ -76,7 +76,7 @@ const App = () => {
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto" }}>
       <h2>Date Picker</h2>
-      <CustomMobilePicker
+      <MobilePickerOptions
         data={pickerData}
         onChange={handleChange}
         initialValues={values}
@@ -138,7 +138,7 @@ const timePickerData = [
   },
 ];
 
-<CustomMobilePicker
+<MobilePickerOptions
   data={timePickerData}
   onChange={handleTimeChange}
   initialValues={{ Hour: 12, Minute: 30 }}
@@ -150,7 +150,7 @@ const timePickerData = [
 You can customize the appearance by providing a className prop and using CSS:
 
 ```jsx
-<CustomMobilePicker
+<MobilePickerOptions
   data={pickerData}
   onChange={handleChange}
   className="custom-picker"
