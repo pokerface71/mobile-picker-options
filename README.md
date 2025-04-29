@@ -1,4 +1,4 @@
-# React Mobile Picker options V [1.0.2]
+# React Mobile Picker options V [1.0.3]
 
 A customizable mobile-friendly picker component for React applications, built with Material-UI.
 
@@ -10,6 +10,7 @@ A customizable mobile-friendly picker component for React applications, built wi
 - Customizable styling
 - TypeScript support
 - Compatible with Material-UI v5 and v6
+- Infinite loop scrolling option
 
 ## Example
 
@@ -105,6 +106,7 @@ export default App;
 | `itemHeight`    | `number`                                | `36`     | Height of each item in pixels  |
 | `className`     | `string`                                | -        | Additional CSS class           |
 | `showLabels`    | `boolean`                               | `true`   | Whether to show column labels  |
+| `infinite`      | `boolean`                               | `false`  | Enable infinite loop scrolling |
 
 ### Types
 
@@ -150,6 +152,27 @@ const timePickerData = [
 ```
 
 ![Time Picker Example](./assets/images/time-picker-example.png)
+
+### Infinite Loop Picker
+
+```jsx
+const numberPickerData = [
+  {
+    label: "Number",
+    options: Array.from({ length: 10 }, (_, i) => ({
+      label: `${i + 1}`,
+      value: i + 1,
+    })),
+  },
+];
+
+<MobilePickerOptions
+  data={numberPickerData}
+  onChange={handleChange}
+  initialValues={{ Number: 1 }}
+  infinite={true}
+/>;
+```
 
 ### Custom Styling
 

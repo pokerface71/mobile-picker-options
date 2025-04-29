@@ -27,6 +27,7 @@ interface MobilePickerOptionsProps {
   itemHeight?: number;
   className?: string;
   showLabels?: boolean;
+  infinite?: boolean;
 }
 
 const PickerContainer = styled(Paper)(({ theme }) => ({
@@ -120,6 +121,7 @@ const MobilePickerOptions: React.FC<MobilePickerOptionsProps> = ({
   itemHeight = 36,
   className,
   showLabels = true,
+  infinite = false,
 }) => {
   // Initialize picker values
   const [pickerValues, setPickerValues] = useState<Record<string, any>>({});
@@ -184,10 +186,20 @@ const MobilePickerOptions: React.FC<MobilePickerOptionsProps> = ({
       const minPosition = -((options.length - 1) * itemHeight);
       const maxPosition = 0;
 
-      if (newPosition > maxPosition) {
-        newPosition = maxPosition;
-      } else if (newPosition < minPosition) {
-        newPosition = minPosition;
+      if (infinite) {
+        // For infinite loop, wrap around when reaching the boundaries
+        if (newPosition > maxPosition) {
+          newPosition = minPosition;
+        } else if (newPosition < minPosition) {
+          newPosition = maxPosition;
+        }
+      } else {
+        // Original behavior with boundaries
+        if (newPosition > maxPosition) {
+          newPosition = maxPosition;
+        } else if (newPosition < minPosition) {
+          newPosition = minPosition;
+        }
       }
 
       // Update positions
@@ -206,7 +218,23 @@ const MobilePickerOptions: React.FC<MobilePickerOptionsProps> = ({
 
       // Calculate the closest snap position
       const itemIndex = Math.round(Math.abs(position) / itemHeight);
-      const snapPosition = -itemIndex * itemHeight;
+      let snapPosition = -itemIndex * itemHeight;
+
+      // For infinite loop, handle wrapping around
+      if (infinite) {
+        if (itemIndex < 0) {
+          snapPosition = 0; // Snap to first item
+        } else if (itemIndex >= options.length) {
+          snapPosition = -((options.length - 1) * itemHeight); // Snap to last item
+        }
+      } else {
+        // Original behavior with boundaries
+        if (itemIndex < 0) {
+          snapPosition = 0;
+        } else if (itemIndex >= options.length) {
+          snapPosition = -((options.length - 1) * itemHeight);
+        }
+      }
 
       // Animate to snap position
       setPositions((prev) => ({
@@ -217,18 +245,29 @@ const MobilePickerOptions: React.FC<MobilePickerOptionsProps> = ({
       currentPositions.current[columnName] = snapPosition;
 
       // Update the selected value
-      if (itemIndex >= 0 && itemIndex < options.length) {
-        const newValue = options[itemIndex].value;
-        const newValues = {
-          ...pickerValues,
-          [columnName]: newValue,
-        };
-
-        setPickerValues(newValues);
-
-        if (onChange) {
-          onChange(newValues);
+      let effectiveIndex = itemIndex;
+      if (infinite) {
+        // For infinite loop, wrap the index
+        if (effectiveIndex < 0) {
+          effectiveIndex = 0;
+        } else if (effectiveIndex >= options.length) {
+          effectiveIndex = options.length - 1;
         }
+      } else if (effectiveIndex < 0 || effectiveIndex >= options.length) {
+        // For non-infinite, use the boundary values
+        effectiveIndex = effectiveIndex < 0 ? 0 : options.length - 1;
+      }
+
+      const newValue = options[effectiveIndex].value;
+      const newValues = {
+        ...pickerValues,
+        [columnName]: newValue,
+      };
+
+      setPickerValues(newValues);
+
+      if (onChange) {
+        onChange(newValues);
       }
     };
 
@@ -254,10 +293,20 @@ const MobilePickerOptions: React.FC<MobilePickerOptionsProps> = ({
       const minPosition = -((options.length - 1) * itemHeight);
       const maxPosition = 0;
 
-      if (newPosition > maxPosition) {
-        newPosition = maxPosition;
-      } else if (newPosition < minPosition) {
-        newPosition = minPosition;
+      if (infinite) {
+        // For infinite loop, wrap around when reaching the boundaries
+        if (newPosition > maxPosition) {
+          newPosition = minPosition;
+        } else if (newPosition < minPosition) {
+          newPosition = maxPosition;
+        }
+      } else {
+        // Original behavior with boundaries
+        if (newPosition > maxPosition) {
+          newPosition = maxPosition;
+        } else if (newPosition < minPosition) {
+          newPosition = minPosition;
+        }
       }
 
       // Update positions
@@ -272,7 +321,23 @@ const MobilePickerOptions: React.FC<MobilePickerOptionsProps> = ({
       momentumTimers.current[columnName] = setTimeout(() => {
         // Calculate the closest snap position
         const itemIndex = Math.round(Math.abs(newPosition) / itemHeight);
-        const snapPosition = -itemIndex * itemHeight;
+        let snapPosition = -itemIndex * itemHeight;
+
+        // For infinite loop, handle wrapping around
+        if (infinite) {
+          if (itemIndex < 0) {
+            snapPosition = 0; // Snap to first item
+          } else if (itemIndex >= options.length) {
+            snapPosition = -((options.length - 1) * itemHeight); // Snap to last item
+          }
+        } else {
+          // Original behavior with boundaries
+          if (itemIndex < 0) {
+            snapPosition = 0;
+          } else if (itemIndex >= options.length) {
+            snapPosition = -((options.length - 1) * itemHeight);
+          }
+        }
 
         // Animate to snap position
         setPositions((prev) => ({
@@ -283,18 +348,29 @@ const MobilePickerOptions: React.FC<MobilePickerOptionsProps> = ({
         currentPositions.current[columnName] = snapPosition;
 
         // Update the selected value
-        if (itemIndex >= 0 && itemIndex < options.length) {
-          const newValue = options[itemIndex].value;
-          const newValues = {
-            ...pickerValues,
-            [columnName]: newValue,
-          };
-
-          setPickerValues(newValues);
-
-          if (onChange) {
-            onChange(newValues);
+        let effectiveIndex = itemIndex;
+        if (infinite) {
+          // For infinite loop, wrap the index
+          if (effectiveIndex < 0) {
+            effectiveIndex = 0;
+          } else if (effectiveIndex >= options.length) {
+            effectiveIndex = options.length - 1;
           }
+        } else if (effectiveIndex < 0 || effectiveIndex >= options.length) {
+          // For non-infinite, use the boundary values
+          effectiveIndex = effectiveIndex < 0 ? 0 : options.length - 1;
+        }
+
+        const newValue = options[effectiveIndex].value;
+        const newValues = {
+          ...pickerValues,
+          [columnName]: newValue,
+        };
+
+        setPickerValues(newValues);
+
+        if (onChange) {
+          onChange(newValues);
         }
       }, 100);
     };

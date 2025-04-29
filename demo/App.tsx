@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Container, Box, Typography, Tabs, Tab, Paper } from "@mui/material";
-import { DatePickerExample, TimePickerExample } from "../src/examples";
+import {
+  DatePickerExample,
+  TimePickerExample,
+  InfinitePickerExample,
+} from "../src/examples";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -63,6 +67,7 @@ const App: React.FC = () => {
             >
               <Tab label="Date Picker" {...a11yProps(0)} />
               <Tab label="Time Picker" {...a11yProps(1)} />
+              <Tab label="Infinite Loop" {...a11yProps(2)} />
             </Tabs>
           </Box>
 
@@ -72,6 +77,10 @@ const App: React.FC = () => {
 
           <TabPanel value={tabValue} index={1}>
             <TimePickerExample />
+          </TabPanel>
+
+          <TabPanel value={tabValue} index={2}>
+            <InfinitePickerExample />
           </TabPanel>
         </Paper>
 
